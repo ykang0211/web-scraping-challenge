@@ -20,7 +20,7 @@
     <div class="row">
       <div class="col-lg-12">
           <h2>Latest Mars News</h2>
-          <h4>{{ mars.news_title }}</h4>
+          <h4>{{ mars.news_t }}</h4>
           <p>{{ mars.news_p }}</p>
       </div>
   </div>
@@ -28,7 +28,7 @@
   <div class="row">
       <div class="col-lg-8 col-sm-12">
           <h2>Featured Mars Image</h2>
-          <img class="featured-image" src= {{mars.src}} style="width: 720px; display: block;">
+          <img class="featured-image" src= "{{ mars.src }}" style="width: 720px; display: block;">
       </div>
       <div class="col-lg-4 col-sm-12">
           <div class="card">
@@ -47,47 +47,12 @@
   <br>
 
   <h2>Mars Hemispheres</h2>
+  
 
-  <div class="row">
-      <div class="col-md-6 col-sm-12">  
-          <div class="card" style="width:30rem;">
-              <img class="card-img-top" src={{mars.src_h[0].img_url}}>
-              <div class="card-body">
-                  <h4>{{mars.src_h[0].title}}</h4>
-              </div>
-          </div>
-      </div> 
-      <div class="col-md-6 col-sm-12">  
-          <div class="card" style="width:30rem;">
-              <img class="card-img-top" src={{mars.src_h[1]}}>
-              <div class="card-body">
-                  <h4>{{ mars.src_h[1].title }}</h4>
-              </div>
-          </div>
-      </div>      
-  </div>
 
-  <div class="row">
-        <div class="col-md-6 col-sm-12">  
-            <div class="card" style="width:30rem;">
-              <img class="card-img-top" src={{mars.src_h[2]}}>
-              <div class="card-body">
-                  <h4>{{ mars.src_h[2].soup }}</h4>
-              </div>
-            </div>
-        </div> 
-        <div class="col-md-6 col-sm-12">  
-            <div class="card" style="width:30rem;">
-              <img class="card-img-top" src={{mars.src_h[3]}}>
-              <div class="card-body">
-                  <h4>{{ mars.src_h[3].title_text }}</h4>
-              </div>
-            </div>
-        </div>      
-    </div>
 
     <!-- Try this code to see hemi working -->
-    {% for item in mars.hemispheres %}
+    {% for item in mars.src_h %}
     <div class="col-md-6">
         <div class="card text-white bg-dark" style="margin: 50px;">
             <img class="card-img-top" src="{{ item.img_url }}" />

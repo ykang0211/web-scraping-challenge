@@ -1,6 +1,7 @@
 from splinter import Browser
 from splinter.exceptions import ElementDoesNotExist
 from bs4 import BeautifulSoup
+import pandas as pd
 
 
 
@@ -24,9 +25,13 @@ def scrape():
     html = browser.html
     soup = BeautifulSoup(html, 'lxml')
 
-    mars["news"] = soup.find('ul', class_='item_list')
-    mars["news_title"] = news.h3.text
-    mars["news_p"] = news.find('div', class_="article_teaser_body").text
+    # mars["news"] = soup.find('ul', class_='item_list')
+    # mars["news_title"] = news.h3.text
+    # mars["news_p"] = news.find('div', class_="article_teaser_body").text
+    mars["news_t"] = soup.find('div', class_='content_title').text
+    mars["news_p"] = soup.find('div', class_="article_teaser_body").text
+
+
 
     # JPL Mars Space Image
     url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
@@ -34,13 +39,18 @@ def scrape():
 
  
 
-    browser.click_link_by_partial_text('FULL IMAGE')
-    browser.click_link_by_partial_text('more info')
+    # browser.click_link_by_partial_text('FULL IMAGE')
+    # browser.click_link_by_partial_text('more info')
+
 
     html = browser.html
     soup = BeautifulSoup(html, 'lxml')
 
-    mars["image"] = soup.article.figure.a['href'] 
+    image = soup.find('article')['style'].replace('background-image: url(','').replace(');', '')[1:-1]
+
+    # mars["image"] = soup.article.figure.a['href'] 
+    # featured_image_url = 'https://www.jpl.nasa.gov/' + image
+    # mars["src"] = featured_image_url
     featured_image_url = 'https://www.jpl.nasa.gov/' + image
     mars["src"] = featured_image_url
 
@@ -99,8 +109,8 @@ def scrape():
         hemisphere_image_urls.append({'title': title_text, 'img_url': img_url})
 
 
-        src_h = hemisphere_image_urls
-        mars['src_h'] = src_h
+    src_h = hemisphere_image_urls
+    mars['src_h'] = src_h
 
     # mars = {
     #     'news_title': news_title,
